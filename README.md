@@ -307,7 +307,7 @@ import PushNotificationAndroid from 'react-native-push-notification'
 
 Notifications with inline reply: 
 
-You must register an action as "ReplyInput", this will show in the notifications an input to write in. 
+You must register an action as "ReplyInput", this will show a notification with an input to write in. 
 
 EXAMPLE:
 ```javascript
