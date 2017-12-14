@@ -387,10 +387,10 @@ public class RNPushNotificationHelper {
                         final String KEY_TEXT_REPLY = "key_text_reply";
 
                         RemoteInput remoteInput = new RemoteInput.Builder(KEY_TEXT_REPLY)
-                                .setLabel(replyLabel)
+                                .setLabel(bundle.getString("reply_placeholder_text"))
                                 .build();
                         NotificationCompat.Action replyAction = new NotificationCompat.Action.Builder(
-                                icon, replyLabel, pendingActionIntent)
+                                icon, bundle.getString("reply_button_text"), pendingActionIntent)
                                 .addRemoteInput(remoteInput)
                                 .setAllowGeneratedReplies(true)
                                 .build();

@@ -303,6 +303,11 @@ import PushNotificationAndroid from 'react-native-push-notification'
 })();
 ```
 
+Notifications with inline reply: 
+
+You must register an action as "Reply", this will show in the notifications an input to write in. 
+
+
 For iOS, you can use this [package](https://github.com/holmesal/react-native-ios-notification-actions) to add notification actions.
 
 ## Set application badge icon
