@@ -381,7 +381,7 @@ public class RNPushNotificationHelper {
                     actionIntent.putExtra("notification", bundle);
                     PendingIntent pendingActionIntent = PendingIntent.getBroadcast(context, notificationID, actionIntent,
                             PendingIntent.FLAG_UPDATE_CURRENT);
-                    if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT_WATCH && action.equals("Reply")){
+                    if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT_WATCH && action.equals("ReplyInput")){
                         replyNoti = true;
                         String replyLabel = "Escribe aquí tu respuesta...";
                         final String KEY_TEXT_REPLY = "key_text_reply";
