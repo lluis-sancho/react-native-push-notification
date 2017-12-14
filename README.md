@@ -216,6 +216,8 @@ PushNotification.localNotification({
     number: '10', // (optional) Valid 32 bit integer specified as string. default: none (Cannot be zero)
     repeatType: 'day', // (Android only) Repeating interval. Could be one of `week`, `day`, `hour`, `minute, `time`. If specified as time, it should be accompanied by one more parameter 'repeatTime` which should the number of milliseconds between each interval
     actions: '["Yes", "No"]',  // (Android only) See the doc for notification actions to know more
+    reply_placeholder_text: "Placeholder input reply", //only if actions include "ReplyInput"
+    reply_button_text: "Button action text" //only if actions include "ReplyInput"
 });
 ```
 
@@ -307,6 +309,17 @@ Notifications with inline reply:
 
 You must register an action as "ReplyInput", this will show in the notifications an input to write in. 
 
+EXAMPLE:
+```javascript
+PushNotification.localNotificationSchedule({
+  message: "My Notification Message", // (required)
+  date: new Date(Date.now() + (60 * 1000)), // in 60 secs
+  actions: '["ReplyInput"]',
+  tag: hash_prepared,
+  reply_placeholder_text: "Write your response...",
+  reply_button_text: "Reply"
+});
+```
 
 For iOS, you can use this [package](https://github.com/holmesal/react-native-ios-notification-actions) to add notification actions.
 
