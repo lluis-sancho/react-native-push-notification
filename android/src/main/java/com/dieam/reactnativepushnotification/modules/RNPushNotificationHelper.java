@@ -332,7 +332,6 @@ public class RNPushNotificationHelper {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 notification.setCategory(NotificationCompat.CATEGORY_CALL);
-
                 String color = bundle.getString("color");
                 if (color != null) {
                     notification.setColor(Color.parseColor(color));
@@ -381,21 +380,25 @@ public class RNPushNotificationHelper {
                     actionIntent.putExtra("notification", bundle);
                     PendingIntent pendingActionIntent = PendingIntent.getBroadcast(context, notificationID, actionIntent,
                             PendingIntent.FLAG_UPDATE_CURRENT);
-                    if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT_WATCH && action.equals("ReplyInput")){
-                        replyNoti = true;
-                        String replyLabel = "Escribe aquí tu respuesta...";
-                        final String KEY_TEXT_REPLY = "key_text_reply";
+                    if(action.equals("ReplyInput")){
+                        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT_WATCH){
+                            final String KEY_TEXT_REPLY = "key_text_reply";
 
-                        RemoteInput remoteInput = new RemoteInput.Builder(KEY_TEXT_REPLY)
-                                .setLabel(bundle.getString("reply_placeholder_text"))
-                                .build();
-                        NotificationCompat.Action replyAction = new NotificationCompat.Action.Builder(
-                                icon, bundle.getString("reply_button_text"), pendingActionIntent)
-                                .addRemoteInput(remoteInput)
-                                .setAllowGeneratedReplies(true)
-                                .build();
+                            RemoteInput remoteInput = new RemoteInput.Builder(KEY_TEXT_REPLY)
+                                    .setLabel(bundle.getString("reply_placeholder_text"))
+                                    .build();
+                            NotificationCompat.Action replyAction = new NotificationCompat.Action.Builder(
+                                    icon, bundle.getString("reply_button_text"), pendingActionIntent)
+                                    .addRemoteInput(remoteInput)
+                                    .setAllowGeneratedReplies(true)
+                                    .build();
 
-                        notification.addAction(replyAction);
+                            notification.addAction(replyAction);
+
+                        }
+                        else{
+                            break;
+                        }
                     }
                     else{
                         // Add "action" for later identifying which button gets pressed
@@ -420,6 +423,7 @@ public class RNPushNotificationHelper {
                 commit(editor);
             }
             Notification info = notification.build();
+
             info.defaults |= Notification.DEFAULT_LIGHTS;
 
             if (bundle.containsKey("tag")) {
