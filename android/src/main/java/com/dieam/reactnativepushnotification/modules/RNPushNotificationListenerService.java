@@ -48,6 +48,7 @@ public class RNPushNotificationListenerService extends GcmListenerService {
         }
 
         Log.v(LOG_TAG, "onMessageReceived: " + bundle);
+        Boolean isForeground = isApplicationInForeground();
 
         // We need to run this on the main thread, as the React code assumes that is true.
         // Namely, DevServerHelper constructs a Handler() without a Looper, which triggers:
@@ -63,6 +64,7 @@ public class RNPushNotificationListenerService extends GcmListenerService {
                     handleRemotePushNotification((ReactApplicationContext) context, bundle);
                 } else {
                     // Otherwise wait for construction, then send the notification
+                    bundle.putBoolean("killed", true);
                     mReactInstanceManager.addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener() {
                         public void onReactContextInitialized(ReactContext context) {
                             handleRemotePushNotification((ReactApplicationContext) context, bundle);

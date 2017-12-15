@@ -214,9 +214,15 @@ public class RNPushNotificationHelper {
             if (bundle.getString("message") == null) {
                 // this happens when a 'data' notification is received - we do not synthesize a local notification in this case
                 Log.d(LOG_TAG, "Cannot send to notification centre because there is no 'message' field in: " + bundle);
-                return;
-            }
 
+                if(bundle.getBoolean("killed")){
+                    bundle.putString("message", bundle.getString("description"));
+                }
+                else{
+                    return;
+                }
+            }
+            Log.e(LOG_TAG, "Continua");
             String notificationIdString = bundle.getString("id");
             if (notificationIdString == null) {
                 Log.e(LOG_TAG, "No notification ID specified for the notification");
