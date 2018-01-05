@@ -47,7 +47,7 @@ public class RNPushNotificationListenerService extends GcmListenerService {
             }
         }
 
-        Log.v(LOG_TAG, "onMessageReceived: " + bundle);
+        Log.v(LOG_TAG, "onMessageReceived-Updated: " + bundle);
         Boolean isForeground = isApplicationInForeground();
 
         // We need to run this on the main thread, as the React code assumes that is true.
